@@ -1,0 +1,7 @@
+Generated with the built-in image_gen tool.
+Prompt: A transparent 4 by 4 game sprite sheet of photorealistic ice cream scoops, consistently centered in equal square cells. Real frozen cream ridges, ice crystals, pores, ruffled edges, soft diffuse lighting. No cast shadows, ground shadows, surface, bowl, cone, text, or labels.
+Flavor order, left to right by row:
+Vanilla, strawberry, chocolate, cookie dough;
+Mint chip, Neapolitan, blueberry, pistachio;
+Mango, cookies and cream, coffee, birthday cake;
+Rainbow swirl, salted caramel, raspberry, black sesame.

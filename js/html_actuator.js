@@ -62,7 +62,23 @@ HTMLActuator.prototype.addTile = function (tile) {
   this.applyClasses(wrapper, classes);
 
   inner.classList.add("tile-inner");
-  inner.textContent = tile.value;
+  var flavor = this.flavors[tile.value] || "Rainbow swirl";
+  var scoop = document.createElement("span");
+  scoop.classList.add("ice-cream-scoop");
+  var flavorIndex = this.flavorOrder.indexOf(tile.value);
+  if (flavorIndex < 0) flavorIndex = 12;
+  scoop.style.backgroundPosition = ((flavorIndex % 4) * 100 / 3) + "% " +
+    (Math.floor(flavorIndex / 4) * 100 / 3) + "%";
+  if (tile.value === 64 || tile.value === 32768) {
+    var imageName = tile.value === 64 ? "rocky-road" : "chocolate-chip";
+    scoop.style.backgroundImage = "url(style/scoops/" + imageName + ".png)";
+    scoop.style.backgroundSize = "contain";
+    scoop.style.backgroundPosition = "center";
+  }
+  scoop.setAttribute("aria-hidden", "true");
+  inner.setAttribute("role", "img");
+  inner.setAttribute("aria-label", flavor + ", " + tile.value);
+  inner.appendChild(scoop);
 
   if (tile.previousPosition) {
     // Make sure that the tile gets rendered in the previous position first
@@ -137,3 +153,24 @@ HTMLActuator.prototype.clearMessage = function () {
   this.messageContainer.classList.remove("game-won");
   this.messageContainer.classList.remove("game-over");
 };
+
+HTMLActuator.prototype.flavors = {
+  2: "Vanilla",
+  4: "Strawberry",
+  8: "Chocolate",
+  16: "Cookie dough",
+  32: "Mint chip",
+  48: "Neapolitan",
+  64: "Rocky road",
+  128: "Pistachio",
+  256: "Mango",
+  512: "Cookies & cream",
+  1024: "Coffee",
+  2048: "Birthday cake",
+  4096: "Rainbow swirl",
+  8192: "Salted caramel",
+  16384: "Raspberry",
+  32768: "Chocolate chip"
+};
+
+HTMLActuator.prototype.flavorOrder = [2, 4, 8, 16, 32, 48, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768];
